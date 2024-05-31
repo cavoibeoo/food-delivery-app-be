@@ -97,10 +97,14 @@ const similarImg = async (img) => {
         const finalData = []
         for (let i = 0; i < sortedObject.similar_images.length; i++) {
             for (let j = 0; j < products.length; j++) {
+
+                let preTitle = sortedObject.similar_images[i]
+                let extensionStartIndex = sortedObject.similar_images[i].lastIndexOf('.');  // Find the last dot index
                 
-                let preTitle = sortedObject.similar_images[i].replace(/\.jpg$/i, "") 
+                preTitle = preTitle.slice(0, extensionStartIndex);
                 preTitle = preTitle.replace(/_/g, " ")
-                console.log(preTitle + " vs " + products[j].title)
+
+                // console.log(preTitle + " vs " + products[j].title)
 
                 if (products[j].title == preTitle && products[j].deleted == false){
                     finalData.push(products[j])
