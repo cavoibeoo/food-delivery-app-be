@@ -92,7 +92,7 @@ const addUser = async (req, res, next) => {
 
 const uploadAvatar = async (req, res, next) =>{
     try {
-        const user_id = req.body.user_id;
+        const user_id = req.cookies.user_id;
 
         // Check if userId is available
         if (!user_id) {
