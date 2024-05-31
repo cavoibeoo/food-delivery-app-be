@@ -102,8 +102,8 @@ const createProduct = async (data, img) => {
             'price': Number(data.price),
             'description' : String(data.description),
             'ingredients' : String (data.ingredients),  
-            // 'thumbnail': await updateProImg(img, String(data.title)),
-            'thumbnail' : "https://firebasestorage.googleapis.com/v0/b/foodapp-5e715.appspot.com/o/food_img%2Fproduct_img%2FChicken_Nugget.jpg?alt=media&token=c51ebdba-3fcd-4cdc-b8e1-1d44048f3b9d",
+            'thumbnail': await updateProImg(img, String(data.title)),
+            // 'thumbnail' : "https://firebasestorage.googleapis.com/v0/b/foodapp-5e715.appspot.com/o/food_img%2Fproduct_img%2FChicken_Nugget.jpg?alt=media&token=c51ebdba-3fcd-4cdc-b8e1-1d44048f3b9d",
             'sold' : 0
         }
         const uploadData = await addDoc(collection(fireStoreDb, "product"), preprocessedData);
