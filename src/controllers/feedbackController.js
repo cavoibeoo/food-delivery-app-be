@@ -33,14 +33,14 @@ const addFeedback = async (req, res, next) => {
         data.user_id = req.cookies.user_id
 
         if (! await feedbackData.isBought(data)) {
-            return res.status(401).send({
+            return res.send({
                 status: 'Error',
                 message: 'You have not bought this product'
             });
         }
 
         if (await feedbackData.isFeedback(data)) {
-            return res.status(401).send({
+            return res.send({
                 status: 'Error',
                 message: 'You have give this product a feedback'
             });

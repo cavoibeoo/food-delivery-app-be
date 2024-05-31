@@ -24,7 +24,7 @@ const getAllOrders = async (req, res, next) => {
 const getOrderByUserId = async (req, res, next) => {
     try {
         if (!req.cookies.user_id) {
-            return res.status(401).send({
+            return res.send({
                 status: 'Error',
                 message: 'User is not logged in'
             });
@@ -55,7 +55,7 @@ const createOrder = async (req, res, next) =>{
     try {
 
         if (!req.cookies.user_id) {
-            return res.status(401).send({
+            return res.send({
                 status: 'Error',
                 message: 'User is not logged in'
             });
@@ -157,7 +157,7 @@ const cancelOrder = async (req, res, next) => {
 
         //Check login
         if (!req.cookies.user_id) {
-            return res.status(401).send({
+            return res.send({
                 status: 'Error',
                 message: 'User is not logged in'
             });
@@ -167,7 +167,7 @@ const cancelOrder = async (req, res, next) => {
 
         //Check owned
         if (orderInfo.user_id != req.cookies.user_id){
-            return res.status(401).send({
+            return res.send({
                 status: 'Error',
                 message: 'Order is not belonged to this user'
             });

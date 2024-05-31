@@ -19,7 +19,7 @@ const getUserById = async (req, res) => {
 
         // Check if userId is available
         if (!user_id) {
-            return res.status(401).send({
+            return res.send({
                 status: 'Error',
                 message: 'User ID not found in the cookie'
             });
@@ -80,7 +80,7 @@ const addUser = async (req, res, next) => {
             const insert = await userData.createUser(data);
             res.status(200).send({status: "Success", insert: insert});
         }else {
-            res.status(401).send({
+            res.send({
                 status: 'Error',
                 message: 'This is email already exists'
             })
@@ -96,7 +96,7 @@ const uploadAvatar = async (req, res, next) =>{
 
         // Check if userId is available
         if (!user_id) {
-            return res.status(401).send({
+            return res.send({
                 status: 'Error',
                 message: 'User ID not found in the cookie'
             });
@@ -135,7 +135,7 @@ const updateUser = async (req, res, next) => {
 
                 // Check if userId is available
         if (!id) {
-            return res.status(401).send({
+            return res.send({
                 status: 'Error',
                 message: 'User ID not found in the cookie'
             });
@@ -144,7 +144,7 @@ const updateUser = async (req, res, next) => {
         const updated = await userData.updateUser(id, data);
 
         if (updated.msg != 'Update successfully') 
-            return res.status(401).send({status : "Error", updated : updated});
+            return res.send({status : "Error", updated : updated});
 
         res.status(200).send( {status : "Success", updated : updated} );
     } catch (error) {
@@ -160,7 +160,7 @@ const updateUserPassword = async(req, res, next) =>{
 
         // Check if userId is available
         if (!id) {
-            return res.status(401).send({
+            return res.send({
                 status: 'Error',
                 message: 'User ID not found in the cookie'
             });
@@ -179,7 +179,7 @@ const getRecentProducts = async (req, res, next) => {
         const user_id = req.cookies.user_id;
                 // Check if userId is available
         if (!user_id) {
-            return res.status(401).send({
+            return res.send({
                 status: 'Error',
                 message: 'User ID not found in the cookie'
             });
@@ -201,7 +201,7 @@ const updateUserInfo = async (req, res, next) => {
         const data = req.body;
         const updated = await userData.updateUserInfo(data);
         if (updated.msg != 'Update successfully') 
-            return res.status(401).send({status : "Error", updated : updated});
+            return res.send({status : "Error", updated : updated});
         res.status(200).send({status : "Success", updated : updated});
     } catch (error) {
         res.status(400).send(error.message);
