@@ -12,13 +12,14 @@ const storage = multer.diskStorage({
         cb(null, path.join(__dirname, '../static', 'uploads',))
     },
     filename: function(req, file, cb) {
-        cb(null, Date.now() + file.originalname)
+        cb(null, "compareImg.jpg")
     }
 })
 const upload = multer({storage: storage})
 
-router.post('/chat-box/', aiController.chatBox);
-router.post('/similar/', upload.single("thumbnail"), aiController.similarImg);
+router.post('/ai/chat-box/', aiController.chatBox);
+router.post('/ai/similar/', upload.single("thumbnail"), aiController.similarImg);
+router.get('/ai/get-dataset/', aiController.getDataset)
 
 
 module.exports = {

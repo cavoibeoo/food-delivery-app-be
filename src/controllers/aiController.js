@@ -9,7 +9,7 @@ const chatBox = async (req, res, next) => {
         const answer = await aiData.chatBox(data);
         res.send(answer);
     }catch(error) {
-        res.status(400).send(error.message);
+        res.send(error.message);
     }
 }
 
@@ -20,11 +20,21 @@ const similarImg = async (req, res, next) => {
         const answer = await aiData.similarImg(data);
         res.send(answer);
     }catch(error) {
-        res.status(400).send(error.message);
+        res.send(error.message);
+    }
+}
+
+const getDataset = async (req, res, next) => {
+    try {
+        const answer = await aiData.getDataset(res);
+        res.send(answer);
+    }catch(error) {
+        res.send(error.message);
     }
 }
 
 module.exports = {
     chatBox,
-    similarImg
+    similarImg,
+    getDataset
 }

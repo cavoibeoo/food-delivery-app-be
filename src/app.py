@@ -9,8 +9,6 @@ from tensorflow.keras.applications.vgg16 import VGG16, preprocess_input
 from tensorflow.keras.preprocessing import image
 from sklearn.metrics.pairwise import cosine_similarity
 
-
-
 # Suppress TensorFlow logs
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 tf.get_logger().setLevel('ERROR')
@@ -35,12 +33,9 @@ def calculate_similarity(query_features, dataset_features):
 
 if __name__ == '__main__':
     
-    print(os.getcwd())
-
-    
     query_image_path = sys.argv[1]
 
-    dataset_dir = 'static/dataset'
+    dataset_dir = os.path.join(query_image_path, '../../', 'dataset')
 
     # Extract features from the query image
     query_features = extract_features(query_image_path)
@@ -67,4 +62,4 @@ if __name__ == '__main__':
 
     # Output the results as JSON
     results = {'query_image': os.path.basename(query_image_path), 'similar_images': top_results}
-    print(json.dumps(results))
+    print((results))
