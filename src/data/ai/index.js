@@ -4,6 +4,7 @@ const fireStore = require('firebase/firestore')
 const productData = require('../product')
 const dotenv = require('dotenv');
 const axios = require('axios');
+const { exec } = require('child_process');
 
 // get firebase related functions
 const { getFirestore, doc, setDoc, collection, getDocs, query, where, orderBy, addDoc, updateDoc, limit} = require('firebase/firestore');
@@ -60,8 +61,33 @@ const chatBox = async (data) => {
     }
 }
 
-
+const similarImg = async (img) => {
+    try {
+        exec(`set PYTHONIOENCODING=utf-8 && python src/app.py ${img.path}`, (error, stdout, stderr) => {
+            if (error) {
+                console.error('Error executing Python script:', error);
+                return ('Error executing Python script');
+            }
+            if (stderr) {
+                console.error('Python script stderr:', stderr);
+            }
+            console.log('Python script stdout:', stdout);
+    
+            // Parse the output from the Python script and send it as a response
+            const responseData = stdout;
+    
+            // console.log(req.file.path)
+    
+            return json(responseData);
+        });
+        
+    } catch (error) {
+        console.log(error);
+        return error.message;
+    }
+}
 
 module.exports = {
     chatBox,
+    similarImg
 }

@@ -13,7 +13,18 @@ const chatBox = async (req, res, next) => {
     }
 }
 
+const similarImg = async (req, res, next) => {
+    try {
+        const data = req.file
+        // console.log(data)
+        const answer = await aiData.similarImg(data);
+        res.send(answer);
+    }catch(error) {
+        res.status(400).send(error.message);
+    }
+}
 
 module.exports = {
     chatBox,
+    similarImg
 }
