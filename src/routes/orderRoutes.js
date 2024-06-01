@@ -4,12 +4,12 @@ const express = require('express');
 const orderController = require('../controllers/orderController');    
 const router = express.Router();
 
-router.get('/orders', orderController.getAllOrders);   
-router.get('/order/id/', orderController.getOrderByUserId);
-router.post('/order/info/', orderController.getOrderInfo)
-router.post('/order/add/', orderController.createOrder);
-router.put('/order/update/', orderController.updateOrder);
-router.put('/order/cancel/', orderController.cancelOrder);
+router.get('/orders', orderController.getAllOrders);   // get all orders
+router.get('/order/id/', orderController.getOrderByUserId); // get order by user id
+router.post('/order/info/', orderController.getOrderInfo) // get order by order id for admin 
+router.post('/order/add/', orderController.createOrder); // create order
+router.put('/order/update/', orderController.updateOrder); // update order status
+router.put('/order/cancel/', orderController.cancelOrder); // cancel order
 
 
 module.exports = {

@@ -19,19 +19,18 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage})
 
 //link to the routes of each type
-router.get('/product', productController.getAllProducts);  //For users
-router.get('/products', productController.getAllProductsAdmin);  //For users
-
-router.get('/product/bestseller/', productController.getBestSeller);
-router.post('/product/recent', productController.getRecentById)
-router.post('/product/id/', productController.getProductById);
-router.post('/product/cat/', productController.getProductByCat);
-router.post('/product/add/', upload.single("thumbnail"), productController.addProduct);
-router.post('/product/search/', productController.searchProduct);
-router.put('/product/update/',upload.single("thumbnail"), productController.updateProduct);
+router.get('/product', productController.getAllProducts);  //For users to get all products
+router.get('/products', productController.getAllProductsAdmin);  //For admin to get all products
+router.get('/product/bestseller/', productController.getBestSeller); //get the bestseller product
+router.post('/product/recent', productController.getRecentById) // get recent accessed product of user
+router.post('/product/id/', productController.getProductById); //get product by it's id
+router.post('/product/cat/', productController.getProductByCat); //get product by category
+router.post('/product/add/', upload.single("thumbnail"), productController.addProduct); //for admin to add a new product
+router.post('/product/search/', productController.searchProduct); // search product
+router.put('/product/update/',upload.single("thumbnail"), productController.updateProduct); // for admin to update a product
 // router.put('/product/size/', productController.updateSizeProduct);
 router.put('/product/disable/', productController.deleteProduct); //use for admin disable product
-router.put('/product/enable/', productController.enableProduct);
+router.put('/product/enable/', productController.enableProduct);//use for admin enable product
 
 module.exports = {
     routes: router

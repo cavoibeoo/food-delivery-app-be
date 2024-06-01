@@ -2,6 +2,7 @@
 
 const userData = require('../data/cart');
 
+//Get cart by user id
 const getCartById = async (req, res, next) => {
 
     try {
@@ -16,6 +17,7 @@ const getCartById = async (req, res, next) => {
     }
 }
 
+//Add a product to cart
 const addProduct = async (req, res, next) => {
  
     try {
@@ -29,6 +31,7 @@ const addProduct = async (req, res, next) => {
     }
 }
 
+// Remove product from cart
 const removeProduct = async (req, res, next) => {
     try {
         const id = req.cookies.user_id;
@@ -41,7 +44,7 @@ const removeProduct = async (req, res, next) => {
     }
 }
 
-
+//Validate cart item before add to make order
 // Input example: {product_ids: [1, 2, 3]}
 const validateCartItem = async (req, res, next) => {
     try {

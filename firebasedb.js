@@ -5,7 +5,7 @@ const {getFirestore}  = require('firebase/firestore');
 let app
 let fireStoreDb
 
-//Initialize connection to Firebase and get Firestore
+//Initialize connection to Firebase app and get Firestore database
 try {
   app = initializeApp(config.firebaseConfig)
   fireStoreDb = getFirestore(app)

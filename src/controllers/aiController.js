@@ -2,6 +2,7 @@
 
 const aiData = require('../data/ai');
 
+//Chat box controller that send request to OpenAI API to generate answer 
 const chatBox = async (req, res, next) => {
     try {
         const data = req.body
@@ -13,6 +14,7 @@ const chatBox = async (req, res, next) => {
     }
 }
 
+//similar image controller that handle the request to return the similar product with the image
 const similarImg = async (req, res, next) => {
     try {
         const data = req.file
@@ -24,6 +26,7 @@ const similarImg = async (req, res, next) => {
     }
 }
 
+//unused
 const getDataset = async (req, res, next) => {
     try {
         const answer = await aiData.getDataset(res);
