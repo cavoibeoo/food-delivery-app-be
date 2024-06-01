@@ -2,7 +2,7 @@
 
 const feedbackData = require('../data/feedback');
 
-/* viết hàm tương tự với roleController */
+//get all feedback
 const getAllFeedbacks = async (req, res, next) => {
     try {
 
@@ -26,12 +26,14 @@ const getFeedbackById = async (req, res, next) => {
     }
 }
 
+// add a feedback
 const addFeedback = async (req, res, next) => {
     try {
         const data = req.body;
         if (!req.cookies.user_id) return res.status(404).send("User not found")
         data.user_id = req.cookies.user_id
 
+        //Check if user had bought the product
         if (! await feedbackData.isBought(data)) {
             return res.send({
                 status: 'Error',
@@ -39,6 +41,7 @@ const addFeedback = async (req, res, next) => {
             });
         }
 
+        // check wether the user has comment, if has not allow more
         if (await feedbackData.isFeedback(data)) {
             return res.send({
                 status: 'Error',

@@ -2,6 +2,7 @@
 
 const userData = require('../data/user');
 
+//get all user
 const getAllUsers = async (req, res, next) => {
     try {
         const userList = await userData.getUser();
@@ -12,6 +13,7 @@ const getAllUsers = async (req, res, next) => {
     }
 }
 
+//get user by user id for user (check cookie)
 const getUserById = async (req, res) => {
     try {   
         // // Get userId from the cookie
@@ -45,6 +47,7 @@ const getUserById = async (req, res) => {
     }
 };
 
+//Get user by id for admin
 const getUserByIdAdmin = async (req, res) => {
     try {   
         // // Get userId from the cookie
@@ -70,6 +73,7 @@ const getUserByIdAdmin = async (req, res) => {
     }
 };
 
+//add new user
 const addUser = async (req, res, next) => {
     
     try {
@@ -90,6 +94,7 @@ const addUser = async (req, res, next) => {
     }
 }
 
+//Upload user avatar
 const uploadAvatar = async (req, res, next) =>{
     try {
         const user_id = req.cookies.user_id;
@@ -117,6 +122,8 @@ const uploadAvatar = async (req, res, next) =>{
       }
 }
 
+
+//Reset password
 const resetPassword = async(req, res, next) =>{
     try {
         const {email, password} = req.body;
@@ -152,7 +159,7 @@ const updateUser = async (req, res, next) => {
     }
 }
 
-// Use for user
+// Use for user password
 const updateUserPassword = async(req, res, next) =>{
     try {
         const password = req.body.password;
@@ -173,6 +180,7 @@ const updateUserPassword = async(req, res, next) =>{
     }
 }
 
+//get recent accessed product
 const getRecentProducts = async (req, res, next) => {
 
     try {
@@ -195,7 +203,7 @@ const getRecentProducts = async (req, res, next) => {
 
 }
 
-// For admin only
+// For admin to update user info
 const updateUserInfo = async (req, res, next) => {
     try {
         const data = req.body;
@@ -226,6 +234,7 @@ const uploadUserAvatar = async (req, res, next) =>{
       }
 }
 
+//disable user
 const deleteUser = async (req, res, next) => {
     try {
         const id = req.body.user_id;
@@ -236,6 +245,7 @@ const deleteUser = async (req, res, next) => {
     }
 }
 
+//enable user
 const enableUser = async (req, res, next)=>{
     try {
         const id = req.body.user_id;

@@ -7,7 +7,7 @@ const orderDetailsData = require('../data/order_details');
 
 // const order_detailData = require('../data/order_details');
 
-
+// get all order
 const getAllOrders = async (req, res, next) => {
     try {
 
@@ -19,7 +19,7 @@ const getAllOrders = async (req, res, next) => {
     }
 }
 
-
+//get order by user id
 //get by user id/ use for fetch all orders that user ordered
 const getOrderByUserId = async (req, res, next) => {
     try {
@@ -38,6 +38,7 @@ const getOrderByUserId = async (req, res, next) => {
     }
 }
 
+//get order information
 const getOrderInfo = async (req, res, next) => {
     try {
         const order_id = req.body.order_id
@@ -49,6 +50,7 @@ const getOrderInfo = async (req, res, next) => {
     }
 }
 
+//Create order
 // Created status is 0: cancel, 1: pending, 2: shipping, 3 completed
 // //add by user, when user checkout
 const createOrder = async (req, res, next) =>{
@@ -76,8 +78,10 @@ const createOrder = async (req, res, next) =>{
             //Add order details
             const orderDetails = await orderDetailsData.addOrderDetails(order.order_data.order_id, cartItem.products)
             
+            //minus the stock of product
             const updateProductQuantity = await productData.updateMultipleProductQuantity(cartItem.products)   
 
+            // send response
             const sendMsg = {
                 created : order , 
                 remove_from_cart: removeProductFromCart,
@@ -108,12 +112,16 @@ const createOrder = async (req, res, next) =>{
 //     "status" : "shipping",
 //     "order_date" : "May 24, 2024"
 // }
+
+//Update order status
 const updateOrder = async (req, res, next) => {
     try {
         const data = req.body;
 
         const orderStatus = await orderData.getOrderStatus(req.body.order_id)
 
+        //Cannot cancel if the product is deliverd to ship
+        //Cannot change status if the order is canceled
         if (orderStatus >1 && req.body.status == 0 ){
             return res.send({
                 status: "error",    
@@ -149,7 +157,7 @@ const updateOrder = async (req, res, next) => {
     }
 }
 
-// For user
+// For user to cancel ordere
 const cancelOrder = async (req, res, next) => {
 
     try {

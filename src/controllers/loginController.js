@@ -3,10 +3,12 @@ const nodemailer = require('nodemailer');
 const loginData = require('../data/login');
 const userData = require('../data/user');
 
+//Login function for user 
 const checkLogin = async (req, res, next) => {
     try {
         const data = req.body;
 
+        //Check if email is existed
         const checkEmail = await userData.checkEmailExist(data.email);
         if(!checkEmail){
             return res.send({
@@ -16,6 +18,7 @@ const checkLogin = async (req, res, next) => {
             })
         }
 
+        //Check if password is correct
         const check = await loginData.checkLogin(data);
         if(check){
             const userInfo = await userData.getByEmail(data);
@@ -42,6 +45,7 @@ const checkLogin = async (req, res, next) => {
     }
 }
 
+//Check user password
 const checkPassword = async (req, res, next) => {
     try {
         let data = req.body
@@ -53,6 +57,8 @@ const checkPassword = async (req, res, next) => {
     }
 
 }
+
+//check user login status
 const checkLoginStatus = async (req, res, next) => {
     const userId = req.cookies.user_id;
     // Check if userId is present in the cookie
@@ -71,6 +77,7 @@ const checkLoginStatus = async (req, res, next) => {
     next();
 };
 
+//Logout
 const logout = (req, res, next) => {
     // Clear the userId cookie
     res.clearCookie('user_id');
@@ -83,10 +90,12 @@ const logout = (req, res, next) => {
     next();
   };
 
+  //Send otp when forgotpassword
 const forgotSendmail = async (req, res) => {
     try {
         const { to } = req.body;
 
+        //Check if email existed
         const checkEmail = await userData.checkEmailExist(req.body.to);
         if(!checkEmail){
             return res.send({
@@ -96,6 +105,7 @@ const forgotSendmail = async (req, res) => {
             })
         }
 
+        //defined credentials
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -108,7 +118,9 @@ const forgotSendmail = async (req, res) => {
             }
         });
     
+        //send otp
         async function getConfirmationCode() {
+            //Create a hashed confirmation code save to db and send to mail the original one
             const code = await loginData.confirmCode(req.body.to);
             
             let html = `<h2>This is the confirmation code to reset your password,</h2>
@@ -150,7 +162,7 @@ const forgotSendmail = async (req, res) => {
     }    
 }
 
-
+//Check otp code
 const checkConfirmCode = async (req, res) =>{
     try {
         //data include email + otp

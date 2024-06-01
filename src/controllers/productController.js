@@ -3,6 +3,7 @@
 const productData = require('../data/product');
 const userData = require('../data/user')
 
+//Get all product
 const getAllProducts = async (req, res, next) => {
     try {
         const productList = await productData.getProduct();
@@ -11,6 +12,8 @@ const getAllProducts = async (req, res, next) => {
         res.status(400).send(error.message);
     }
 }
+
+//Get product for admin
 const getAllProductsAdmin = async (req, res, next) => {
     try {
         const productList = await productData.getProductAdmin();
@@ -19,6 +22,8 @@ const getAllProductsAdmin = async (req, res, next) => {
         res.status(400).send(error.message);
     }
 }
+
+//Get product by id
 const getProductById = async (req, res, next) => {
     try {
         const data = req.body;
@@ -38,6 +43,7 @@ const getProductById = async (req, res, next) => {
     }
 }
 
+//Get recent by id
 const getRecentById = async (req, res, next) => {
     try {
         const data = req.body;
@@ -51,6 +57,7 @@ const getRecentById = async (req, res, next) => {
     }
 }
 
+//Get product by category
 const getProductByCat = async (req, res, next) => {
     try {
         const data = req.body;
@@ -61,10 +68,12 @@ const getProductByCat = async (req, res, next) => {
     }
 }
 
+//add a new product
 const addProduct = async (req, res, next) => {
     try {
         const data = req.body;
 
+        //Check if image is included
         if (!req.file) {
           return res.status(400).json({ message: 'Food image is missing!' });
         }       
@@ -83,6 +92,7 @@ const addProduct = async (req, res, next) => {
     }
 }
 
+//Search product by title
 const searchProduct = async (req, res, next) => {
     try {
         const title = req.body.title;
@@ -93,6 +103,7 @@ const searchProduct = async (req, res, next) => {
     }
 }
 
+//Update product
 const updateProduct = async (req, res, next) => {
     try {
         const data = req.body;
@@ -109,6 +120,7 @@ const updateProduct = async (req, res, next) => {
     }
 }
 
+//Get bestseller
 const getBestSeller = async (req, res, next) => {
     try {
         const data = req.body;
@@ -131,6 +143,7 @@ const getBestSeller = async (req, res, next) => {
 //     }
 // }
 
+//Disable the product
 const deleteProduct = async (req, res, next) => {
     try {
         const id = req.body.product_id;
@@ -142,6 +155,7 @@ const deleteProduct = async (req, res, next) => {
     }
 }
 
+//Enable the product
 const enableProduct = async (req, res, next) =>{
     try {
         const id = req.body.product_id;

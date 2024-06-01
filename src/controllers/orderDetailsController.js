@@ -2,7 +2,7 @@
 
 const orderDetailData = require('../data/order_details');
 
-
+//Get order by user id
 const getByOrderID = async (req, res, next) => {
     try {
         const orderDetails = await orderDetailData.getByOrderID(req.body.order_id);

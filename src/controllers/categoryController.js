@@ -1,6 +1,7 @@
 'use strict';
 const categoryData = require('../data/category/');
 
+//get all categories
 const getAllCategories = async (req, res, next) => {
     try {
 
@@ -12,6 +13,7 @@ const getAllCategories = async (req, res, next) => {
     }
 }
 
+//get category by id
 const getCategoryById = async (req, res, next) => {
     try {
         const data = req.body;
@@ -23,6 +25,7 @@ const getCategoryById = async (req, res, next) => {
     }
 }
 
+//add new category
 const addCategory = async (req, res, next) => {
     try {
         const data = req.body;
@@ -33,6 +36,7 @@ const addCategory = async (req, res, next) => {
     }
 }
 
+//update category
 const updateCategory = async (req, res, next) => {
     try {
         const data = req.body;
@@ -43,6 +47,7 @@ const updateCategory = async (req, res, next) => {
     }
 }
 
+//enable category
 const enableCategory = async (req, res, next) => {
     try {
         const data = req.body;
@@ -53,6 +58,7 @@ const enableCategory = async (req, res, next) => {
     }
 }
 
+//disable category
 const disableCategory = async (req, res, next) => {
     try {
         const data = req.body;
