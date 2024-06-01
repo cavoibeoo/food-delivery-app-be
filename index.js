@@ -16,15 +16,14 @@ const categoryRoutes = require('./src/routes/categoryRoutes')
 const feedbackRoutes = require('./src/routes/feedbackRoutes')
 const aiRoutes = require('./src/routes/aiRoutes')
 
-
 const app = express()
 
 app.use(express.json({ extended:true })) 
 // CORS configuration
 const corsOptions = {
-    origin: 'http://localhost:3000', // your frontend's URL
+    origin: 'http://localhost:3000', //frontend's URL
     credentials: true,
-  };
+};
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended : true }))
 app.use(cookieParser());

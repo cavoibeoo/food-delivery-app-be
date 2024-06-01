@@ -1,6 +1,8 @@
 'use strict';
 const { app, fireStoreDb } = require('../../../firebasedb');
 const fireStore = require('firebase/firestore')
+const fs = require('fs')
+const path = require('path')
 
 // get firebase related functions
 const { getFirestore, doc, setDoc, collection, getDocs, query, where, orderBy, addDoc, updateDoc, limit} = require('firebase/firestore');
@@ -132,11 +134,12 @@ const updateProImg = async (img, title) => {
     try {
         const storage = getStorage(app)
 
-        const extension = img.originalname.slice(img.originalname.lastIndexOf(".")); // Extract from last dot
+        const fileBuffer = fs.readFileSync(img.path); // Read the file from disk
+        const extension = img.path.slice(img.originalname.lastIndexOf(".")); // Extract from last dot
 
         const storageRef = ref(storage, `food_img/product_img/${title.trim().replace(/\s/g, "_") + extension}`)
         const metadata = {contentType : "image/jpeg"}
-        const snapshot = await uploadBytesResumable(storageRef, img.buffer, metadata)
+        const snapshot = await uploadBytesResumable(storageRef, fileBuffer, metadata)
 
         const downloadURL = await getDownloadURL(snapshot.ref)
         // console.log(downloadURL)
