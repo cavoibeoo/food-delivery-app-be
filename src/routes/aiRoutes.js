@@ -6,10 +6,11 @@ const router = express.Router();
 const path = require('path');
 
 const multer = require('multer');
-// Path to the image in the static/uploads folder
+
+// Path to the image in the public/uploads folder
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, path.join(__dirname, '../static', 'uploads',))
+        cb(null, path.join(__dirname, '../../public', 'uploads',))
     },
     filename: function(req, file, cb) {
         cb(null, "compareImg.jpg")

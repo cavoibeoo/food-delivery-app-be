@@ -21,7 +21,7 @@ const chatBox = async (data) => {
 
         let products = await productData.getProduct()
         
-        let question = data.question + " from my dataset " + JSON.stringify(products) + " not mentioned about image link or thumbnail"
+        let question = data.question + " from my dataset " + JSON.stringify(products) + " not mentioned about image link, thumbnail and dataset, answer with the begin of the answer is: Hungry Cat has: "
         
         const headers = {
             'Content-Type': 'application/json',
