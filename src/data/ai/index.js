@@ -21,11 +21,11 @@ const chatBox = async (data) => {
 
         let products = await productData.getProduct()
         
-        let question = data.question + " from my dataset " + JSON.stringify(products)
+        let question = data.question + " from my dataset " + JSON.stringify(products) + " not mentioned about image link or thumbnail"
         
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${OPENAI_API_KEY}`
+            'Authorization': `Bearer ${KEY}`
         };
 
         const API_URL = 'https://api.openai.com/v1/chat/completions';

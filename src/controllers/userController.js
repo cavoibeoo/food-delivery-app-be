@@ -216,7 +216,7 @@ const uploadUserAvatar = async (req, res, next) =>{
           return res.status(400).json({ message: 'No image file uploaded' });
         }
     
-        const result = await userData.uploadUserAva(user_id, req.file);
+        const result = await userData.uploadUserAva(req.body.user_id, req.file);
     
         // Send the response
         res.status(200).json({status : "Success", message: 'Avatar uploaded successfully', user: result });

@@ -35,7 +35,7 @@ if __name__ == '__main__':
     
     query_image_path = sys.argv[1]
 
-    dataset_dir = os.path.join(query_image_path, '../../', 'dataset')
+    dataset_dir = os.path.join(os.path.dirname(query_image_path), '../', 'dataset')
 
     # Extract features from the query image
     query_features = extract_features(query_image_path)
